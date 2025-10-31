@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Note Taking App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="shortcut icon"
+      href="./Website's icon.svg"
+      type="image/x-icon"
+      style="width: 64px"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>NoteTaker</h1>
+      <p>Your thoughts organized</p>
+      <!-- light/night mode -->
+      <button id="toggle-li_nightbtn">
+        <i class="fa-solid fa-moon"></i>
+        <i class="fa-solid fa-sun"></i>
+      </button>
+    </header>
+
+    <div class="page" id="page">
+      <!-- Note organizer -->
+      <div class="mynote">
+        <div class="notehead">
+          <h2>My Notes</h2>
+          <p><span id="NoteCounter">0</span> notes</p>
+        </div>
+        <label for="search" class="label">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="search" id="search" placeholder="Search notes..." />
+        </label>
+        <div class="categ">
+          <h3>Categories</h3>
+          <div class="catetype">
+            <div>
+              <i class="fa-solid fa-list-ul"></i>
+              All Notes
+            </div>
+            <p id="AllNotesCount" style="background-color: #4b47bc">0</p>
+          </div>
+
+          <div class="catetype">
+            <div>
+              <i class="fa-solid fa-globe" style="color: #216d15"></i>
+              General
+            </div>
+            <p id="generalcount" style="background-color: #216d15">0</p>
+          </div>
+
+          <div class="catetype">
+            <div>
+              <i class="fa-solid fa-briefcase"></i>
+              Work
+            </div>
+            <p id="workcount" style="background-color: #098eb3">0</p>
+          </div>
+
+          <div class="catetype">
+            <div>
+              <i class="fa-solid fa-heart"></i>
+              Personal
+            </div>
+            <p id="PersonalCount" style="background-color: #ef4444">0</p>
+          </div>
+
+          <div class="catetype">
+            <div>
+              <i class="fa-solid fa-lightbulb"></i>
+              Idea
+            </div>
+            <p id="IdeaCount" style="background-color: #eab308">0</p>
+          </div>
+        </div>
+        <!-- not now just a design -->
+        <div class="tags">
+          <h3>Tags</h3>
+          <div>
+            <h4>#important</h4>
+            <h4>#todo</h4>
+            <h4>#meeting</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- creat new note -->
+      <div class="newnote">
+        <h1>
+          <i class="fa-solid fa-notes-medical"></i>
+          Create New Note
+        </h1>
+        <div class="title">
+          <h4>Title</h4>
+          <input type="text" placeholder="Note Title" id="titleinp" />
+        </div>
+        <div class="content">
+          <h4>Content</h4>
+          <textarea
+            placeholder="Write your note here..."
+            id="contentarea"
+          ></textarea>
+        </div>
+        <div class="extra">
+          <div class="ext1">
+            <h4>Category</h4>
+            <select id="categoryselect">
+              <option>General</option>
+              <option>Work</option>
+              <option>Personal</option>
+              <option>Idea</option>
+            </select>
+          </div>
+          <div class="ext2">
+            <h4>Tags (comma separated)</h4>
+            <input type="text" placeholder="important, todo..." id="taginp" />
+          </div>
+          <div class="ext3">
+            <input type="checkbox" id="checkinp" />
+            <p>Pin note</p>
+          </div>
+        </div>
+        <div class="btns">
+          <button id="clear">Clear</button>
+          <button id="save">Save Note</button>
+        </div>
+      </div>
+
+      <!-- Note display -->
+      <div class="noteDisplay">
+        <div class="headnote">
+          <h1>Your Notes</h1>
+          <div style="display: flex; gap: 5px">
+            <p style="margin-top: 4px">Sort by:</p>
+            <select id="FilterSelect">
+              <option>All Notes</option>
+              <option>Newest First</option>
+              <option>Oldest First</option>
+              <option>Title (A-Z)</option>
+              <option>Pinned Note</option>
+            </select>
+          </div>
+        </div>
+        <div class="displays" id="displays">
+          <h1>
+            <i class="fa-solid fa-note-sticky"></i>
+            <br />
+            No notes found matching your criteria
+          </h1>
+          <!-- <div class="note1">
+                <div class="noteupper">
+                    <div class="text">
+                        <div>
+                            <h2 style="margin-bottom: 5px;">Title</h2>
+                            <p>content</p>
+                        </div>
+                        <i class="fa-solid fa-thumbtack"></i>
+                    </div>
+                    <div class="minicateg">
+                        <h4><i class="fa-solid fa-note-sticky"></i>
+                        General</h4>
+                        <p>Sep 3, 2025, 08:00 PM</p>
+                    </div>
+                    <p class="tagsp">
+                        #kdjsfd</p>
+                </div>
+                <div class="notelower">
+                    <p style="color: #67d4e7;" onclick="shownote()">View</p>
+                    <div style="display: flex; gap: 10px;">
+                        <p>Edit</p>
+                        <p style="color: red;">Delete</p>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <h3>&copy; 2025 Note Taking App. All rights reserved.</h3>
+    </footer>
+  </body>
+  <script src="./script.js" defer></script>
+</html>
