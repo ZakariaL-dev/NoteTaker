@@ -39,8 +39,12 @@
         </div>
         <label for="search" class="label">
           <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="search" id="search" placeholder="Search by title..." />
-          <!-- id=search mazal makhdamtch bih -->
+          <input
+            type="search"
+            id="search"
+            placeholder="Search by title..."
+            onchange="searchNotes()"
+          />
         </label>
         <div class="categ">
           <h3>Categories</h3>
@@ -159,30 +163,45 @@
             No notes found matching your criteria
           </h1>
           <!-- <div class="note1">
-                <div class="noteupper">
-                    <div class="text">
-                        <div>
-                            <h2 style="margin-bottom: 5px;">Title</h2>
-                            <p>content</p>
-                        </div>
-                        <i class="fa-solid fa-thumbtack"></i>
+            <div class="noteupper">
+                <div class="text">
+                    <div>
+                        <h2 style="margin-bottom: 5px;">${nt.Title}</h2>
+                        <p>${nt.Content}</p>
                     </div>
-                    <div class="minicateg">
-                        <h4><i class="fa-solid fa-note-sticky"></i>
-                        General</h4>
-                        <p>Sep 3, 2025, 08:00 PM</p>
-                    </div>
-                    <p class="tagsp">
-                        #kdjsfd</p>
+                    ${nt.Pinned ? `<i class="fa-solid fa-thumbtack"></i>` : ""}
                 </div>
-                <div class="notelower">
-                    <p style="color: #67d4e7;" onclick="shownote()">View</p>
-                    <div style="display: flex; gap: 10px;">
-                        <p>Edit</p>
-                        <p style="color: red;">Delete</p>
-                    </div>
+                <div class="minicateg">
+                    <h4 style="background-color: ${bgColor};">
+                        <i class="fa-solid fa-note-sticky"></i>
+                        ${nt.Category}
+                    </h4>
+                    <p>${nt.id}</p>
                 </div>
-            </div> -->
+                <div class="tagDisplay">
+                  ${
+                    nt.Tag &&
+                    nt.Tag.split(",")
+                      .map(
+                        (tag) =>
+                          `<span class="tagsp" style="margin-right: 10px;">#${tag.trim()}</span>`,
+                      )
+                      .join("")
+                  }
+                </div>
+            </div>
+            <div class="notelower">
+                <p style="color: #67d4e7;" onclick="shownote(${
+                  nt.uniqueid
+                })">Show</p>
+                <div style="display: flex; gap: 10px;">
+                    <p onclick="editnote(${nt.uniqueid})">Edit</p>
+                    <p style="color: red;" onclick="deletenote(${
+                      nt.uniqueid
+                    })">Delete</p>
+                </div>
+            </div>
+        </div> -->
         </div>
       </div>
     </div>

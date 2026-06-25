@@ -171,7 +171,6 @@ function addnewnote(nt) {
                     </div>
                     ${nt.Pinned ? `<i class="fa-solid fa-thumbtack"></i>` : ""}
                 </div>
-                ${nt.Tag == "" ? `<div style="margin-top: 35px;"></div>` : ""}
                 <div class="minicateg">
                     <h4 style="background-color: ${bgColor};">
                         <i class="fa-solid fa-note-sticky"></i>
@@ -179,7 +178,17 @@ function addnewnote(nt) {
                     </h4>
                     <p>${nt.id}</p>
                 </div>
-                ${nt.Tag !== "" ? `<p class="tagsp">#${nt.Tag}</p>` : ""}
+                <div class="tagDisplay">
+                  ${
+                    nt.Tag &&
+                    nt.Tag.split(",")
+                      .map(
+                        (tag) =>
+                          `<span class="tagsp" style="margin-right: 10px;">#${tag.trim()}</span>`,
+                      )
+                      .join("")
+                  }
+                </div>
             </div>
             <div class="notelower">
                 <p style="color: #67d4e7;" onclick="shownote(${
@@ -393,6 +402,30 @@ function filterByCategory(category) {
   }
 
   const filteredNotes = notes.filter((note) => note.Category === category);
+  noteDisplay.innerHTML = "";
+
+  if (filteredNotes.length === 0) {
+    noteDisplay.innerHTML = `
+      <h1>
+          <i class="fa-solid fa-note-sticky"></i>
+          <br>
+          No notes found matching your criteria
+      </h1>
+      `;
+    return;
+  }
+  filteredNotes.forEach((note) => addnewnote(note));
+}
+
+// search functionality
+const searchRslt = document.getElementById("search");
+
+function searchNotes() {
+  const searchTerm = searchRslt.value.toLowerCase();
+  const filteredNotes = notes.filter((note) =>
+    note.Title.toLowerCase().includes(searchTerm),
+  );
+
   noteDisplay.innerHTML = "";
 
   if (filteredNotes.length === 0) {
