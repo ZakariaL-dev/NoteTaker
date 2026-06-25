@@ -56,7 +56,7 @@ function handleSave() {
 
   if (editingNoteId !== null) {
     const noteIndex = notes.findIndex(
-      (note) => note.uniqueid === editingNoteId
+      (note) => note.uniqueid === editingNoteId,
     );
     if (noteIndex !== -1) {
       notes[noteIndex] = {
@@ -338,14 +338,13 @@ function FilterNotes() {
     });
   } else if (FilterValue === "Title (A-Z)") {
     notesToRender.sort((a, b) =>
-      a.Title.localeCompare(b.Title, "en", { sensitivity: "base" })
+      a.Title.localeCompare(b.Title, "en", { sensitivity: "base" }),
     );
 
     notesToRender.forEach((note) => {
       addnewnote(note);
     });
   } else if (FilterValue === "Newest First") {
-
     notesToRender.sort((a, b) => b.uniqueid - a.uniqueid);
     notesToRender.forEach((note) => {
       addnewnote(note);
@@ -367,4 +366,44 @@ function FilterNotes() {
     </h1>
     `;
   }
+}
+
+// filter by category
+function filterByCategory(category) {
+  const allCategoryElements = document.querySelectorAll(".catetype");
+  allCategoryElements.forEach((element) => {
+    element.style.backgroundColor =
+      "color-mix(in srgb, var(--elementbackgr) 60%, transparent)";
+  });
+
+  allCategoryElements.forEach((element) => {
+    const text = element.textContent.trim();
+
+    if (
+      (category === "allNotes" && text.includes("All Notes")) ||
+      text.includes(category)
+    ) {
+      element.style.backgroundColor = "var(--elementbackgr)";
+    }
+  });
+
+  if (category === "allNotes") {
+    renderNotes();
+    return;
+  }
+
+  const filteredNotes = notes.filter((note) => note.Category === category);
+  noteDisplay.innerHTML = "";
+
+  if (filteredNotes.length === 0) {
+    noteDisplay.innerHTML = `
+      <h1>
+          <i class="fa-solid fa-note-sticky"></i>
+          <br>
+          No notes found matching your criteria
+      </h1>
+      `;
+    return;
+  }
+  filteredNotes.forEach((note) => addnewnote(note));
 }

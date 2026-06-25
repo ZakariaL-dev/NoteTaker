@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -39,19 +39,20 @@
         </div>
         <label for="search" class="label">
           <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="search" id="search" placeholder="Search notes..." />
+          <input type="search" id="search" placeholder="Search by title..." />
+          <!-- id=search mazal makhdamtch bih -->
         </label>
         <div class="categ">
           <h3>Categories</h3>
-          <div class="catetype">
+          <div class="catetype" onclick="filterByCategory('allNotes')">
             <div>
               <i class="fa-solid fa-list-ul"></i>
               All Notes
             </div>
-            <p id="AllNotesCount" style="background-color: #4b47bc">0</p>
+            <p id="AllNotesCount" style="background-color: #7470e7">0</p>
           </div>
 
-          <div class="catetype">
+          <div class="catetype" onclick="filterByCategory('General')">
             <div>
               <i class="fa-solid fa-globe" style="color: #216d15"></i>
               General
@@ -59,7 +60,7 @@
             <p id="generalcount" style="background-color: #216d15">0</p>
           </div>
 
-          <div class="catetype">
+          <div class="catetype" onclick="filterByCategory('Work')">
             <div>
               <i class="fa-solid fa-briefcase"></i>
               Work
@@ -67,7 +68,7 @@
             <p id="workcount" style="background-color: #098eb3">0</p>
           </div>
 
-          <div class="catetype">
+          <div class="catetype" onclick="filterByCategory('Personal')">
             <div>
               <i class="fa-solid fa-heart"></i>
               Personal
@@ -75,7 +76,7 @@
             <p id="PersonalCount" style="background-color: #ef4444">0</p>
           </div>
 
-          <div class="catetype">
+          <div class="catetype" onclick="filterByCategory('Idea')">
             <div>
               <i class="fa-solid fa-lightbulb"></i>
               Idea
